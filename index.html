@@ -768,6 +768,39 @@ function initializePortfolio() {
             }
         }
     
+
+// Inline script from HTML
+
+// Protection against unwanted navigation in iframe content
+(function() {
+    'use strict';
+    
+    // Only prevent navigation if we're in an iframe
+    if (window.parent !== window) {
+        // Prevent all navigation attempts in iframe
+        document.addEventListener('click', function(e) {
+            const target = e.target.closest('a');
+            if (target && target.href && !target.href.startsWith('#')) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        }, true);
+        
+        // Prevent form submissions in iframe
+        document.addEventListener('submit', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }, true);
+        
+        // Override window.open in iframe
+        window.open = function() {
+            return null;
+        };
+    }
+})();
+
         
     } catch (error) {
         console.warn('Portfolio initialization error:', error);
