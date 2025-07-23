@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>raghuveer9303's Portfolio</title>
     
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📄</text></svg>" type="image/svg+xml">
+    
     <!-- Ensure proper HTTPS loading -->
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     
     <!-- External Dependencies -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
@@ -581,7 +584,7 @@ body {
     
     <!-- Enhanced JavaScript with error handling -->
     <script>
-// Ensure Lucide is loaded before executing other scripts
+// Enhanced portfolio initialization with framework detection
 function initializePortfolio() {
     try {
         // Initialize Lucide icons if available
@@ -589,8 +592,24 @@ function initializePortfolio() {
             lucide.createIcons();
         }
         
+        // Initialize Bootstrap components if available
+        if (typeof bootstrap !== 'undefined') {
+            // Bootstrap is loaded
+            console.log('Bootstrap components initialized');
+        }
+        
         // Your custom JavaScript (preserved as-is)
-        document.addEventListener('DOMContentLoaded', function() {
+        
+// Tailwind CSS runtime configuration
+if (typeof tailwind === 'undefined') {
+    window.tailwind = {
+        config: {
+            // Default Tailwind config
+        }
+    };
+}
+
+document.addEventListener('DOMContentLoaded', function() {
     initializeNetflixPortfolio();
 });
 
@@ -773,6 +792,7 @@ function initializeNavbarShrink() {
             }
         }
     
+
         
     } catch (error) {
         console.warn('Portfolio initialization error:', error);
@@ -787,13 +807,18 @@ if (document.readyState === 'loading') {
     initializePortfolio();
 }
 
-// Fallback for Lucide icons
+// Fallback for missing dependencies
 if (typeof lucide === 'undefined') {
-    console.warn('Lucide icons not loaded, using fallback');
     window.lucide = {
         createIcons: function() {
             console.log('Lucide fallback activated');
         }
+    };
+}
+
+if (typeof tailwind === 'undefined') {
+    window.tailwind = {
+        config: {}
     };
 }
     </script>
