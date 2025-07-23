@@ -13,9 +13,25 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     
     <!-- External Dependencies -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/tailwindcss@3.4.0/dist/tailwind.min.css" rel="stylesheet">
     
     <style>
+
+/* Essential Tailwind utilities for production */
+.container { max-width: 100%; margin: 0 auto; padding: 0 1rem; }
+@media (min-width: 640px) { .container { max-width: 640px; } }
+@media (min-width: 768px) { .container { max-width: 768px; } }
+@media (min-width: 1024px) { .container { max-width: 1024px; } }
+@media (min-width: 1280px) { .container { max-width: 1280px; } }
+
+/* Additional utilities that might be missing */
+.bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+.bg-gradient-to-b { background-image: linear-gradient(to bottom, var(--tw-gradient-stops)); }
+.from-blue-500 { --tw-gradient-from: #3b82f6; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(59, 130, 246, 0)); }
+.to-purple-600 { --tw-gradient-to: #9333ea; }
+.backdrop-blur-sm { backdrop-filter: blur(4px); }
+.backdrop-blur { backdrop-filter: blur(8px); }
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
@@ -600,11 +616,11 @@ function initializePortfolio() {
         
         // Your custom JavaScript (preserved as-is)
         
-// Tailwind CSS runtime configuration
+// Minimal Tailwind runtime for production
 if (typeof tailwind === 'undefined') {
     window.tailwind = {
         config: {
-            // Default Tailwind config
+            // Minimal production config
         }
     };
 }
