@@ -13,28 +13,29 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     
     <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
     --netflix-red: #e50914;
     --netflix-dark-red: #b71c1c;
     --netflix-black: #141414;
     --netflix-gray: #333333;
-    --netflix-light-gray: #808080;
-    --netflix-light: #f5f5f1;
+    --netflix-light-gray: #555555;
     --netflix-white: #ffffff;
+    --netflix-light: #f5f5f1;
 }
 
 body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--netflix-black);
+    color: var(--netflix-light);
+    font-family: 'Inter', sans-serif;
 }
 
-/* --- Keyframe Animations --- */
+/* Animations */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(40px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -42,563 +43,494 @@ body {
     }
 }
 
-.animate-on-scroll {
+.fade-in-section {
     opacity: 0;
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.animate-on-scroll.is-visible {
-    animation: fadeInUp 0.8s ease-out forwards;
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-
-/* --- General & Helper Classes --- */
-.container {
-    max-width: 1200px;
+/* Hero Section */
+.netflix-hero-bg {
+    background-color: var(--netflix-black);
+    background-image: radial-gradient(circle at 20% 50%, rgba(229, 9, 20, 0.1), transparent 30%),
+                      radial-gradient(circle at 80% 40%, rgba(51, 51, 51, 0.15), transparent 40%);
 }
 
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--netflix-white);
-    position: relative;
-    display: inline-block;
+.netflix-text-shadow {
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.section-title::after {
-    content: '';
-    position: absolute;
-    width: 60%;
-    height: 4px;
-    background-color: var(--netflix-red);
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.text-center .section-title::after {
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* --- Navigation --- */
-.nav-link {
+/* Navigation */
+.netflix-nav-link {
     color: var(--netflix-light);
     font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding-bottom: 4px;
-    position: relative;
     transition: color 0.3s ease;
+    position: relative;
+    padding-bottom: 4px;
 }
 
-.nav-link::after {
+.netflix-nav-link:hover {
+    color: var(--netflix-red);
+}
+
+.netflix-nav-link::after {
     content: '';
     position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
     bottom: 0;
     left: 0;
-    width: 100%;
-    height: 2px;
     background-color: var(--netflix-red);
-    transform: scaleX(0);
-    transform-origin: right;
+    transform-origin: bottom right;
     transition: transform 0.3s ease-out;
 }
 
-.nav-link:hover {
+.netflix-nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.netflix-btn-nav {
+    background-color: var(--netflix-red);
+    color: var(--netflix-white);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.netflix-btn-nav:hover {
+    background-color: var(--netflix-dark-red);
     color: var(--netflix-white);
 }
 
-.nav-link:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
+.netflix-btn-nav:hover::after {
+    transform: scaleX(0);
 }
 
 .mobile-nav-link {
-    display: block;
-    padding: 1rem 1.5rem;
-    text-align: center;
-    border-bottom: 1px solid var(--netflix-black);
     color: var(--netflix-light);
-    font-weight: 600;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: color 0.3s, transform 0.3s;
 }
-
 .mobile-nav-link:hover {
-    background-color: var(--netflix-red);
-    color: var(--netflix-white);
+    color: var(--netflix-red);
+    transform: scale(1.1);
 }
 
-/* --- Buttons --- */
-.btn-primary, .btn-primary-sm {
+/* Buttons */
+.netflix-btn-primary {
     background-color: var(--netflix-red);
     color: var(--netflix-white);
-    padding: 0.9rem 2.2rem;
+    padding: 0.875rem 2.5rem;
+    border-radius: 0.25rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border-radius: 4px;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border: 2px solid var(--netflix-red);
 }
-.btn-primary-sm {
-    padding: 0.5rem 1.2rem;
-    font-size: 0.9rem;
-}
-.btn-primary:hover, .btn-primary-sm:hover {
+
+.netflix-btn-primary:hover {
     background-color: var(--netflix-dark-red);
+    border-color: var(--netflix-dark-red);
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.btn-secondary {
+.netflix-btn-secondary {
     background-color: transparent;
-    border: 2px solid var(--netflix-light);
+    border: 2px solid var(--netflix-light-gray);
     color: var(--netflix-light);
-    padding: 0.9rem 2.2rem;
+    padding: 0.875rem 2.5rem;
+    border-radius: 0.25rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border-radius: 4px;
     transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-    background-color: var(--netflix-light);
-    color: var(--netflix-black);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
-}
-
-/* --- Hero Section --- */
-.hero-bg {
-    background-color: var(--netflix-black);
-    background-image: linear-gradient(to bottom, rgba(20, 20, 20, 0.2) 0%, rgba(20, 20, 20, 1) 90%);
-    position: relative;
-}
-
-.hero-bg::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: radial-gradient(circle at 20% 20%, rgba(229, 9, 20, 0.15), transparent 40%),
-                      radial-gradient(circle at 80% 70%, rgba(51, 51, 51, 0.2), transparent 40%);
-    z-index: 0;
-    opacity: 0.7;
-}
-
-.netflix-text-shadow {
-    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
-}
-
-/* --- About Section --- */
-.css-photo-placeholder {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background: linear-gradient(135deg, var(--netflix-red) 0%, var(--netflix-gray) 100%);
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 }
-.css-photo-placeholder::before {
-    content: 'RV';
-    font-size: 5rem;
-    font-weight: 900;
+
+.netflix-btn-secondary:hover {
+    background-color: var(--netflix-light);
     color: var(--netflix-black);
-    opacity: 0.8;
+    border-color: var(--netflix-light);
+    transform: translateY(-3px);
 }
 
-/* --- Experience Timeline --- */
-.timeline-line {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background-color: var(--netflix-gray);
-    transform: translateX(-50%);
-}
-.timeline-item {
-    margin-bottom: 50px;
+/* Section Title */
+.section-title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
     position: relative;
+    display: inline-block;
+    padding-bottom: 0.5rem;
 }
-.timeline-item::after {
+.section-title::after {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: var(--netflix-black);
-    border: 4px solid var(--netflix-red);
-    border-radius: 50%;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-}
-.timeline-content {
-    padding: 20px 30px;
-    position: relative;
-    background-color: var(--netflix-gray);
-    border-radius: 8px;
-    width: 45%;
-}
-.timeline-item:nth-child(odd) .timeline-content {
+    bottom: 0;
     left: 0;
-    text-align: right;
-}
-.timeline-item:nth-child(even) .timeline-content {
-    left: 55%;
-}
-.timeline-date {
-    display: inline-block;
-    padding: 4px 12px;
+    width: 50%;
+    height: 4px;
     background-color: var(--netflix-red);
-    color: var(--netflix-white);
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-bottom: 10px;
 }
-/* Mobile Timeline */
-@media (max-width: 768px) {
-    .timeline-line { left: 10px; }
-    .timeline-item::after { left: 10px; }
-    .timeline-content { width: calc(100% - 40px); left: 40px !important; text-align: left !important; }
-    .timeline-item:nth-child(even) .timeline-content { left: 40px; }
+.text-center .section-title::after {
+    left: 25%;
 }
 
 
-/* --- Horizontal Scroll Projects --- */
+/* Photo Placeholder */
+.photo-placeholder {
+    background: linear-gradient(-45deg, var(--netflix-gray), var(--netflix-black), var(--netflix-light-gray), var(--netflix-gray));
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.photo-placeholder::before {
+    content: 'RV';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8rem;
+    font-weight: 900;
+    color: rgba(229, 9, 20, 0.6);
+    text-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Horizontal Scroll */
 .horizontal-scroll-container {
     overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    padding: 2rem 0;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE 10+ */
     cursor: grab;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
 }
 .horizontal-scroll-container::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
 }
-.horizontal-scroll-content {
-    display: inline-flex;
-    gap: 2rem;
-    padding: 0 2rem; /* Provides spacing at start/end */
-}
 
-.project-card {
-    flex: 0 0 320px;
-    width: 320px;
-    aspect-ratio: 3 / 4;
+/* Portfolio Card */
+.portfolio-card {
+    width: 380px;
     background-color: var(--netflix-gray);
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 2px solid transparent;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    border: 1px solid transparent;
 }
-.project-card:hover {
-    transform: scale(1.05) translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+.portfolio-card:hover {
+    transform: scale(1.03) translateY(-10px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
     border-color: var(--netflix-red);
 }
-.card-content { padding: 1.5rem; }
-.card-category { color: var(--netflix-red); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; }
-.card-title { font-size: 1.5rem; font-weight: 900; margin: 0.5rem 0; color: var(--netflix-white); }
-.card-description { font-size: 0.9rem; color: var(--netflix-light); white-space: normal; line-height: 1.5; }
-.card-footer {
-    padding: 1rem 1.5rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+.card-placeholder {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+.card-placeholder-1 {
+    background: linear-gradient(45deg, #e50914, #3a1c71, #d76d77, #ffaf7b);
+}
+.card-placeholder-2 {
+    background: linear-gradient(45deg, #1d2b64, #f8cdda);
 }
 .card-link {
-    color: var(--netflix-white);
+    color: var(--netflix-red);
     font-weight: 600;
-    transition: color 0.3s ease;
-}
-.card-link i { transition: transform 0.3s ease; }
-.card-link:hover { color: var(--netflix-red); }
-.card-link:hover i { transform: translateX(5px); }
-.card-link-disabled { color: var(--netflix-light-gray); font-weight: 600; cursor: not-allowed; }
-
-
-/* --- Skills Section --- */
-.skill-badge {
     display: inline-block;
+    margin-top: 1rem;
+    transition: transform 0.3s ease;
+}
+.card-link:hover {
+    transform: translateX(5px);
+}
+
+/* Experience Timeline */
+.experience-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+}
+.experience-item:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+.experience-dot {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background-color: var(--netflix-gray);
+    border: 4px solid var(--netflix-red);
+    border-radius: 50%;
+    z-index: 10;
+}
+.experience-content {
+    width: calc(50% - 40px);
+    padding: 10px 20px;
+    background-color: var(--netflix-gray);
+    border-radius: 8px;
+    border-left: 4px solid var(--netflix-red);
+}
+.experience-item:nth-child(odd) .experience-content {
+    border-left: none;
+    border-right: 4px solid var(--netflix-red);
+    text-align: right;
+}
+.experience-item:nth-child(odd) .experience-content ul {
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .experience-item, .experience-item:nth-child(odd) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .experience-content {
+        width: 100%;
+        margin-left: 30px;
+    }
+    .experience-item:nth-child(odd) .experience-content {
+        text-align: left;
+        border-right: none;
+        border-left: 4px solid var(--netflix-red);
+    }
+    .experience-dot {
+        left: 0;
+        transform: none;
+    }
+    .relative > .absolute {
+        left: 9px;
+    }
+}
+
+/* Skill Badge */
+.skill-badge {
     background-color: var(--netflix-gray);
     color: var(--netflix-light);
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
     font-weight: 500;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    border-left: 3px solid var(--netflix-light-gray);
 }
 .skill-badge:hover {
     background-color: var(--netflix-red);
     color: var(--netflix-white);
     transform: translateY(-2px);
+    border-left-color: var(--netflix-dark-red);
 }
 
-/* --- Contact & Footer --- */
-.social-link {
-    font-size: 1.8rem;
+/* Contact Form */
+.contact-input {
+    width: 100%;
+    background-color: var(--netflix-gray);
+    border: 2px solid var(--netflix-light-gray);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    color: var(--netflix-light);
+    transition: border-color 0.3s ease;
+}
+.contact-input:focus {
+    outline: none;
+    border-color: var(--netflix-red);
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.3);
+}
+
+/* Footer */
+.footer-icon {
+    font-size: 1.5rem;
     color: var(--netflix-light-gray);
     transition: color 0.3s ease, transform 0.3s ease;
 }
-.social-link:hover {
+.footer-icon:hover {
     color: var(--netflix-red);
-    transform: scale(1.2);
+    transform: translateY(-3px);
 }
     </style>
 </head>
 <body>
 
 
-    <!-- Header & Navigation -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-netflix-black/80 backdrop-blur-sm">
-        <nav class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <a href="#hero" class="text-3xl font-black text-netflix-red tracking-tighter">RV</a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="nav-link">About</a>
-                    <a href="#experience" class="nav-link">Experience</a>
-                    <a href="#projects" class="nav-link">Projects</a>
-                    <a href="#skills" class="nav-link">Skills</a>
-                    <a href="#contact" class="nav-link btn-primary-sm">Contact</a>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-netflix-black/80 backdrop-blur-md border-b border-netflix-gray/20 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="#hero" class="text-3xl font-black text-netflix-red tracking-tighter">RV</a>
                 </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-netflix-white focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="netflix-nav-link">About</a>
+                    <a href="#portfolio" class="netflix-nav-link">Projects</a>
+                    <a href="#experience" class="netflix-nav-link">Experience</a>
+                    <a href="#skills" class="netflix-nav-link">Skills</a>
+                    <a href="#contact" class="netflix-nav-link netflix-btn-nav">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuButton" class="text-netflix-light hover:text-netflix-red focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
                     </button>
                 </div>
             </div>
-        </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-netflix-gray">
-            <a href="#about" class="mobile-nav-link">About</a>
-            <a href="#experience" class="mobile-nav-link">Experience</a>
-            <a href="#projects" class="mobile-nav-link">Projects</a>
-            <a href="#skills" class="mobile-nav-link">Skills</a>
-            <a href="#contact" class="mobile-nav-link">Contact</a>
         </div>
-    </header>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-netflix-black/95 z-40">
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+            <a href="#about" class="mobile-nav-link text-2xl">About</a>
+            <a href="#portfolio" class="mobile-nav-link text-2xl">Projects</a>
+            <a href="#experience" class="mobile-nav-link text-2xl">Experience</a>
+            <a href="#skills" class="mobile-nav-link text-2xl">Skills</a>
+            <a href="#contact" class="mobile-nav-link text-2xl">Contact</a>
+        </div>
+    </div>
 
     <main>
         <!-- Hero Section -->
-        <section id="hero" class="h-screen w-full flex items-center justify-center text-center hero-bg">
-            <div class="z-10 p-6 flex flex-col items-center max-w-4xl mx-auto">
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-netflix-white uppercase tracking-dramatic netflix-text-shadow animate-on-scroll">Raghuveer Venkatesh</h1>
-                <p class="mt-4 text-xl md:text-2xl text-netflix-light font-semibold animate-on-scroll" style="animation-delay: 200ms;">Senior Data Engineer & Automation Specialist</p>
-                <p class="mt-6 max-w-2xl text-lg text-netflix-light/80 animate-on-scroll" style="animation-delay: 400ms;">
-                    Building scalable data pipelines and ETL solutions to transform complex data into actionable business intelligence.
-                </p>
-                <div class="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 animate-on-scroll" style="animation-delay: 600ms;">
-                    <a href="#projects" class="btn-primary">View My Work <i class="fas fa-arrow-right ml-2"></i></a>
-                    <a href="mailto:raghuveervenkatesh7@gmail.com" class="btn-secondary">Get In Touch</a>
+        <section id="hero" class="h-screen flex items-center justify-center netflix-hero-bg">
+            <div class="text-center px-4 fade-in-section">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter netflix-text-shadow">Raghuveer Venkatesh</h1>
+                <p class="mt-4 text-xl md:text-2xl lg:text-3xl text-netflix-light/80 font-medium">Senior Software Engineer – Data & Automation</p>
+                <div class="mt-10 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#portfolio" class="netflix-btn-primary w-full sm:w-auto">View My Work</a>
+                    <a href="#contact" class="netflix-btn-secondary w-full sm:w-auto">Get In Touch</a>
                 </div>
             </div>
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-20 md:py-32">
-            <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-                <div class="md:col-span-4 animate-on-scroll">
-                    <div class="css-photo-placeholder"></div>
+        <section id="about" class="py-24 fade-in-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-5 gap-12 items-center">
+                <div class="md:col-span-2">
+                    <div class="photo-placeholder aspect-square rounded-lg"></div>
                 </div>
-                <div class="md:col-span-8 animate-on-scroll" style="animation-delay: 200ms;">
-                    <h2 class="section-title">ABOUT ME</h2>
-                    <p class="mt-6 text-lg text-netflix-light/90 leading-relaxed">
-                        A results-driven Senior Software Engineer with a Master's in Applied Data Science and deep expertise in data automation, ETL pipeline development, and cloud services. I specialize in designing and implementing robust systems that handle large-scale data migration, processing, and visualization.
+                <div class="md:col-span-3">
+                    <h2 class="section-title">About Me</h2>
+                    <p class="mt-6 text-lg text-netflix-light/80 leading-relaxed">
+                        A results-driven Senior Software Engineer with a Master's in Applied Data Science, specializing in designing and implementing scalable data pipelines, ETL processes, and automation solutions. With proven expertise in Azure cloud services, Python, and data visualization, I have a track record of leading teams and delivering high-impact data engineering projects ahead of schedule. My passion lies in transforming complex data challenges into efficient, automated systems that drive business value and enhance data governance.
                     </p>
-                    <p class="mt-4 text-lg text-netflix-light/90 leading-relaxed">
-                        As a Certified ScrumMaster, I excel at leading engineering teams to deliver complex projects ahead of schedule, ensuring best practices in data validation, governance, and reporting. My passion lies in leveraging technology like Python, Azure, and PySpark to solve data-centric challenges and drive operational efficiency.
-                    </p>
+                    <div class="mt-8 border-t border-netflix-gray pt-6">
+                        <p class="text-lg"><strong>MS, Applied Data Science:</strong> Indiana University (Expected Dec 2025)</p>
+                        <p class="text-lg mt-2"><strong>Location:</strong> Indianapolis, Indiana</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-24 bg-netflix-gray/10 fade-in-section overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title mb-4">Featured Projects</h2>
+                <p class="text-lg text-netflix-light/60 mb-12">Drag or use mouse wheel to scroll horizontally.</p>
+            </div>
+            <div class="horizontal-scroll-container pb-8">
+                <div class="flex space-x-8 px-4 sm:px-6 lg:px-8">
+                    <!-- Project Card 1 -->
+                    <div class="portfolio-card flex-shrink-0">
+                        <div class="card-placeholder card-placeholder-1"></div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold">Sentiment Analysis Pipeline</h3>
+                            <p class="mt-2 text-netflix-light/70">Engineered a Python pipeline that scraped Amazon & Peloton reviews using BeautifulSoup and PySpark, ingested data into PostgreSQL, and delivered interactive insights via a Streamlit dashboard.</p>
+                            <a href="https://github.com/raghuveer9303/Web-Scraper" target="_blank" class="card-link">View on GitHub <i class="fas fa-arrow-right ml-2"></i></a>
+                        </div>
+                    </div>
+                    <!-- Project Card 2 -->
+                    <div class="portfolio-card flex-shrink-0">
+                        <div class="card-placeholder card-placeholder-2"></div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold">FIFA Striker Market Value Predictor</h3>
+                            <p class="mt-2 text-netflix-light/70">Developed a regression model leveraging player performance and physical stats to forecast football strikers' market value, empowering smarter scouting and investment decisions.</p>
+                            <a href="https://rpubs.com/Raghuveer_Venkatesh/1255695" target="_blank" class="card-link">View Analysis <i class="fas fa-arrow-right ml-2"></i></a>
+                        </div>
+                    </div>
+                     <!-- Add more cards as needed -->
                 </div>
             </div>
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" class="py-20 md:py-32 bg-netflix-gray/20">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title text-center">PROFESSIONAL EXPERIENCE</h2>
-                <div class="relative mt-16 wrap overflow-hidden">
-                    <div class="timeline-line"></div>
-
-                    <!-- Timeline Item 1 -->
-                    <div class="timeline-item animate-on-scroll">
-                        <div class="timeline-content">
-                            <span class="timeline-date">July 2022 – August 2024</span>
-                            <h3 class="text-xl font-bold text-netflix-white">Senior Software Engineer – Data Automation</h3>
-                            <p class="text-netflix-red font-semibold">Eurofins IT, Bangalore, India</p>
-                            <ul class="mt-4 list-disc list-inside text-netflix-light/80 space-y-2">
-                                <li>Designed and implemented a scalable ETL pipeline for 38 Azure tenants using Python and Azure Data Factory.</li>
-                                <li>Led a 6-engineer team as Scrum Master for a successful international SharePoint data migration project.</li>
-                                <li>Developed a PowerApps solution with SQL to automate data entry across 146 office locations.</li>
-                                <li>Automated the migration of 6TB of unstructured data to Azure Blob Storage and SharePoint Online.</li>
-                                <li>Built data ingestion pipelines for M365 logs, decreasing audit time by 70%.</li>
+        <section id="experience" class="py-24 fade-in-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title text-center mb-16">Professional Experience</h2>
+                <div class="relative max-w-3xl mx-auto">
+                    <div class="absolute left-1/2 -translate-x-1/2 h-full w-0.5 bg-netflix-gray/50"></div>
+                    <!-- Experience Item 1 -->
+                    <div class="experience-item mb-16">
+                        <div class="experience-dot"></div>
+                        <div class="experience-content">
+                            <span class="text-netflix-red font-semibold">July 2022 – August 2024</span>
+                            <h3 class="text-2xl font-bold mt-1">Senior Software Engineer – Data Automation</h3>
+                            <h4 class="text-lg text-netflix-light/70 mb-4">Eurofins IT, Bangalore, India</h4>
+                            <ul class="list-disc list-inside space-y-2 text-netflix-light/80">
+                                <li>Designed and implemented a scalable ETL pipeline for 38 Azure tenants using Python & Azure Data Factory.</li>
+                                <li>Led a 6-engineer team as Scrum Master for a multi-national SharePoint data migration project.</li>
+                                <li>Automated migration of 6TB of unstructured data to Azure Blob Storage and SharePoint Online.</li>
+                                <li>Built M365 activity log pipelines, decreasing audit time by 70% and improving data governance.</li>
                             </ul>
                         </div>
                     </div>
-
-                    <!-- Timeline Item 2 -->
-                    <div class="timeline-item animate-on-scroll">
-                        <div class="timeline-content">
-                            <span class="timeline-date">June 2018 – June 2022</span>
-                            <h3 class="text-xl font-bold text-netflix-white">Software Engineer</h3>
-                            <p class="text-netflix-red font-semibold">Eurofins IT, Bangalore, India</p>
-                            <ul class="mt-4 list-disc list-inside text-netflix-light/80 space-y-2">
+                    <!-- Experience Item 2 -->
+                    <div class="experience-item">
+                        <div class="experience-dot"></div>
+                        <div class="experience-content">
+                            <span class="text-netflix-red font-semibold">June 2018 – June 2022</span>
+                            <h3 class="text-2xl font-bold mt-1">Software Engineer</h3>
+                            <h4 class="text-lg text-netflix-light/70 mb-4">Eurofins IT, Bangalore, India</h4>
+                             <ul class="list-disc list-inside space-y-2 text-netflix-light/80">
                                 <li>Deployed scheduled jobs with Azure DevOps to consolidate application logs from 18 distributed servers.</li>
                                 <li>Developed a travel request portal, reducing processing time from 10 days to 3 days.</li>
-                                <li>Created a web app to manage dynamic email distribution lists for over 60,000 users.</li>
-                                <li>Provided real-time access to historical travel data via PowerBI for reporting and cost analysis.</li>
+                                <li>Created a C# web app to manage and display dynamic email distribution lists for 60k+ users.</li>
                             </ul>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="py-20 md:py-32">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title">FEATURED PROJECTS</h2>
-                <p class="text-center mt-4 text-lg text-netflix-light/70">A selection of my work in data engineering and analysis.</p>
-            </div>
-            <div class="mt-16 horizontal-scroll-container">
-                <div class="horizontal-scroll-content">
-                    
-                    <!-- Project Card 1 -->
-                    <div class="project-card animate-on-scroll">
-                        <div class="card-content">
-                            <h4 class="card-category">Data Pipeline & Analysis</h4>
-                            <h3 class="card-title">Sentiment Analysis Pipeline</h3>
-                            <p class="card-description">Engineered a Python-based pipeline that scraped Amazon & Peloton reviews using BeautifulSoup and PySpark, ingested data into PostgreSQL, and delivered interactive insights via a Streamlit dashboard.</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="https://github.com/raghuveer9303/Web-Scraper" target="_blank" class="card-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+        <!-- Skills & Certs Section -->
+        <section id="skills" class="py-24 bg-netflix-gray/10 fade-in-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title text-center mb-16">Skills & Certifications</h2>
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-center md:text-left">Core Competencies</h3>
+                        <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                            <span class="skill-badge">ETL</span><span class="skill-badge">Data Pipelines</span><span class="skill-badge">Automation</span><span class="skill-badge">Database Management</span><span class="skill-badge">Azure Cloud Services</span><span class="skill-badge">Data Visualization</span><span class="skill-badge">REST APIs</span>
                         </div>
                     </div>
-                    
-                    <!-- Project Card 2 -->
-                    <div class="project-card animate-on-scroll" style="animation-delay: 200ms;">
-                        <div class="card-content">
-                            <h4 class="card-category">Machine Learning</h4>
-                            <h3 class="card-title">FIFA Striker Market Value Predictor</h3>
-                            <p class="card-description">Developed a regression model leveraging player performance and physical attributes to forecast football strikers' market value, empowering smarter scouting and investment decisions.</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="https://rpubs.com/Raghuveer_Venkatesh/1255695" target="_blank" class="card-link">View Report <i class="fas fa-arrow-right"></i></a>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-center md:text-left">Languages & Tools</h3>
+                        <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                            <span class="skill-badge">Python</span><span class="skill-badge">SQL</span><span class="skill-badge">PySpark</span><span class="skill-badge">Pandas</span><span class="skill-badge">R</span><span class="skill-badge">C#</span><span class="skill-badge">PowerShell</span><span class="skill-badge">Azure Data Factory</span><span class="skill-badge">Docker</span><span class="skill-badge">Git</span><span class="skill-badge">Power BI</span>
                         </div>
                     </div>
-
-                    <!-- Project Card 3 -->
-                    <div class="project-card animate-on-scroll" style="animation-delay: 400ms;">
-                        <div class="card-content">
-                            <h4 class="card-category">Data Automation</h4>
-                            <h3 class="card-title">M365 Audit Automation</h3>
-                            <p class="card-description">Built data ingestion and processing pipelines for Microsoft 365 activity logs, which decreased audit time by 70% by automating data validation, transformation, and loading processes for improved data governance.</p>
-                        </div>
-                        <div class="card-footer">
-                            <span class="card-link-disabled">Internal Project</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Project Card 4 -->
-                    <div class="project-card animate-on-scroll" style="animation-delay: 600ms;">
-                        <div class="card-content">
-                            <h4 class="card-category">Web Development</h4>
-                            <h3 class="card-title">Internal Travel Portal</h3>
-                            <p class="card-description">Developed Eurofins travel request portal which simplified filling, approval and tracking of travel request forms. The system reduced processing time from 10 days to 3 and provided real-time data access with PowerBI.</p>
-                        </div>
-                        <div class="card-footer">
-                            <span class="card-link-disabled">Internal Project</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="py-20 md:py-32 bg-netflix-gray/20">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="section-title">TECHNICAL SKILLS</h2>
-                <div class="max-w-4xl mx-auto mt-16">
-                    <div class="mb-12 animate-on-scroll">
-                        <h3 class="text-xl font-bold text-netflix-white tracking-widest uppercase mb-6">Languages & Databases</h3>
-                        <div class="flex flex-wrap justify-center gap-3">
-                            <span class="skill-badge">Python</span>
-                            <span class="skill-badge">SQL</span>
-                            <span class="skill-badge">R</span>
-                            <span class="skill-badge">PowerShell</span>
-                            <span class="skill-badge">JavaScript</span>
-                            <span class="skill-badge">C#</span>
-                            <span class="skill-badge">HTML/CSS</span>
-                        </div>
-                    </div>
-                    <div class="mb-12 animate-on-scroll" style="animation-delay: 200ms;">
-                        <h3 class="text-xl font-bold text-netflix-white tracking-widest uppercase mb-6">Tools & Platforms</h3>
-                        <div class="flex flex-wrap justify-center gap-3">
-                            <span class="skill-badge">Azure DevOps</span>
-                            <span class="skill-badge">Azure Data Factory</span>
-                            <span class="skill-badge">Azure Cloud</span>
-                            <span class="skill-badge">Docker</span>
-                            <span class="skill-badge">Git</span>
-                            <span class="skill-badge">Power BI</span>
-                            <span class="skill-badge">SharePoint</span>
-                            <span class="skill-badge">Linux</span>
-                        </div>
-                    </div>
-                    <div class="animate-on-scroll" style="animation-delay: 400ms;">
-                        <h3 class="text-xl font-bold text-netflix-white tracking-widest uppercase mb-6">Core Competencies</h3>
-                        <div class="flex flex-wrap justify-center gap-3">
-                            <span class="skill-badge">ETL</span>
-                            <span class="skill-badge">Data Automation</span>
-                            <span class="skill-badge">Database Management</span>
-                            <span class="skill-badge">Parallel Programming</span>
-                            <span class="skill-badge">Data Visualization</span>
-                            <span class="skill-badge">REST APIs</span>
-                            <span class="skill-badge">Pandas & PySpark</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Certifications & Awards -->
-        <section id="certifications" class="py-20 md:py-32">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title text-center">ACHIEVEMENTS</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16">
-                    <div class="animate-on-scroll">
-                        <h3 class="text-2xl font-bold text-center mb-6"><i class="fas fa-award mr-2 text-netflix-red"></i>Certifications</h3>
-                        <ul class="space-y-3 text-center text-lg text-netflix-light/80">
-                            <li>IBM Certified Data Engineer Professional</li>
-                            <li>Microsoft AZ-900: Azure Fundamentals</li>
-                            <li>Certified ScrumMaster (CSM®)</li>
-                            <li>Kaggle: Python & Pandas</li>
-                            <li>HackerRank: Python (4*), SQL (2*)</li>
-                        </ul>
-                    </div>
-                    <div class="animate-on-scroll" style="animation-delay: 200ms;">
-                        <h3 class="text-2xl font-bold text-center mb-6"><i class="fas fa-star mr-2 text-netflix-red"></i>Awards</h3>
-                        <div class="text-center">
-                             <p class="text-lg text-netflix-light">Eurofins Star Performer Award</p>
-                             <p class="text-netflix-light/80">Q3-2019, Q3-2021, Q1-2023</p>
-                             <p class="mt-2 text-netflix-light/70 italic">For streamlining operations and completing critical projects.</p>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-center md:text-left">Certifications</h3>
+                        <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                             <span class="skill-badge">IBM Certified Data Engineer</span><span class="skill-badge">Microsoft AZ-900</span><span class="skill-badge">Certified ScrumMaster®</span><span class="skill-badge">Kaggle Python & Pandas</span><span class="skill-badge">HackerRank Python 4*</span>
                         </div>
                     </div>
                 </div>
@@ -606,30 +538,41 @@ body {
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-20 md:py-32 bg-netflix-gray/20">
-            <div class="container mx-auto px-6 text-center max-w-3xl">
-                <h2 class="section-title">GET IN TOUCH</h2>
-                <p class="mt-4 text-lg text-netflix-light/70">
-                    Have a project in mind or want to connect? Feel free to reach out.
+        <section id="contact" class="py-24 fade-in-section">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="mt-4 text-lg max-w-2xl mx-auto text-netflix-light/70">
+                    I'm currently seeking new opportunities in data engineering and automation. If you have a project or role where my skills can be of value, please don't hesitate to reach out.
                 </p>
-                <div class="mt-12 text-center animate-on-scroll">
-                    <p class="text-lg text-netflix-light"><i class="fas fa-envelope mr-3 text-netflix-red"></i> raghuveervenkatesh7@gmail.com</p>
-                    <p class="mt-4 text-lg text-netflix-light"><i class="fas fa-phone mr-3 text-netflix-red"></i> (317) 417-8807</p>
-                    <p class="mt-4 text-lg text-netflix-light"><i class="fas fa-map-marker-alt mr-3 text-netflix-red"></i> Indianapolis, Indiana</p>
-                    <div class="mt-8 flex justify-center space-x-6">
-                        <a href="https://www.linkedin.com/in/raghuveer-v-a43652137/" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://github.com/raghuveer9303" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
-                    </div>
+                <div class="mt-12">
+                    <form id="contactForm" class="max-w-xl mx-auto">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <input type="text" name="name" placeholder="Your Name" class="contact-input" required>
+                            <input type="email" name="email" placeholder="Your Email" class="contact-input" required>
+                        </div>
+                        <div class="mt-6">
+                            <textarea name="message" placeholder="Your Message" rows="5" class="contact-input" required></textarea>
+                        </div>
+                        <div class="mt-8">
+                            <button type="submit" class="netflix-btn-primary w-full sm:w-auto">Send Message</button>
+                        </div>
+                    </form>
                 </div>
+                 <div id="form-message" class="mt-6 text-lg text-netflix-white"></div>
             </div>
         </section>
-
     </main>
 
-    <footer class="bg-netflix-black py-6 border-t border-netflix-gray/30">
-        <div class="container mx-auto px-6 text-center text-netflix-light-gray">
+    <!-- Footer -->
+    <footer class="bg-netflix-black border-t border-netflix-gray/20 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-netflix-light/60">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://www.linkedin.com" target="_blank" class="footer-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/raghuveer9303" target="_blank" class="footer-icon"><i class="fab fa-github"></i></a>
+                <a href="mailto:raghuveervenkatesh7@gmail.com" class="footer-icon"><i class="fas fa-envelope"></i></a>
+            </div>
             <p>&copy; 2024 Raghuveer Venkatesh. All Rights Reserved.</p>
-            <p class="text-sm mt-2">Designed with inspiration from Netflix.</p>
+            <p class="text-sm mt-2">Design inspired by Netflix. Built with Tailwind CSS.</p>
         </div>
     </footer>
 
@@ -647,53 +590,62 @@ function initializePortfolio() {
         }
         
         // Your custom JavaScript (preserved as-is)
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', function() {
+    initializeNetflixPortfolio();
+});
 
-    // --- Mobile Menu Toggle ---
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileNavLinks = document.querySelectorAll('#mobile-menu a');
+function initializeNetflixPortfolio() {
+    initializeMobileMenu();
+    initializeSmoothScrolling();
+    initializeScrollAnimations();
+    initializeHorizontalScroll();
+    initializeContactForm();
+    initializeNavbarShrink();
+}
+
+// Mobile Menu Toggle
+function initializeMobileMenu() {
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileNavLinks = mobileMenu.querySelectorAll('a');
 
     if (mobileMenuButton && mobileMenu) {
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
-            const icon = mobileMenuButton.querySelector('i');
-            if (mobileMenu.classList.contains('hidden')) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            } else {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            }
         });
 
-        // Close menu when a link is clicked
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
-                mobileMenuButton.querySelector('i').classList.remove('fa-times');
-                mobileMenuButton.querySelector('i').classList.add('fa-bars');
             });
         });
     }
+}
 
-    // --- Smooth Scrolling for all anchor links ---
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+// Smooth Scrolling for anchor links
+function initializeSmoothScrolling() {
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-            if(targetElement) {
+            if (targetElement) {
                 targetElement.scrollIntoView({
-                    behavior: 'smooth'
+                    behavior: 'smooth',
+                    block: 'start'
                 });
             }
         });
     });
+}
 
-    // --- Scroll Animations with Intersection Observer ---
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
-    const observer = new IntersectionObserver((entries) => {
+// Fade-in animations on scroll
+function initializeScrollAnimations() {
+    const sections = document.querySelectorAll('.fade-in-section');
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
@@ -701,49 +653,105 @@ function initializePortfolio() {
             }
         });
     }, {
+        rootMargin: '0px',
         threshold: 0.1
     });
 
-    animatedElements.forEach(el => {
-        observer.observe(el);
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+}
+
+// Horizontal scroll with mouse wheel and drag
+function initializeHorizontalScroll() {
+    const scrollContainer = document.querySelector('.horizontal-scroll-container');
+    if (!scrollContainer) return;
+
+    // Mouse wheel scroll
+    scrollContainer.addEventListener('wheel', (evt) => {
+        evt.preventDefault();
+        scrollContainer.scrollLeft += evt.deltaY;
     });
 
-    // --- Horizontal Drag-to-Scroll ---
-    const scrollContainer = document.querySelector('.horizontal-scroll-container');
-    if (scrollContainer) {
-        let isDown = false;
-        let startX;
-        let scrollLeft;
+    // Drag to scroll
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
-        scrollContainer.addEventListener('mousedown', (e) => {
-            isDown = true;
-            scrollContainer.classList.add('active');
-            scrollContainer.style.cursor = 'grabbing';
-            startX = e.pageX - scrollContainer.offsetLeft;
-            scrollLeft = scrollContainer.scrollLeft;
-        });
+    scrollContainer.addEventListener('mousedown', (e) => {
+        isDown = true;
+        scrollContainer.classList.add('grabbing');
+        scrollContainer.style.cursor = 'grabbing';
+        startX = e.pageX - scrollContainer.offsetLeft;
+        scrollLeft = scrollContainer.scrollLeft;
+    });
 
-        scrollContainer.addEventListener('mouseleave', () => {
-            isDown = false;
-            scrollContainer.classList.remove('active');
-            scrollContainer.style.cursor = 'grab';
-        });
+    scrollContainer.addEventListener('mouseleave', () => {
+        isDown = false;
+        scrollContainer.classList.remove('grabbing');
+         scrollContainer.style.cursor = 'grab';
+    });
 
-        scrollContainer.addEventListener('mouseup', () => {
-            isDown = false;
-            scrollContainer.classList.remove('active');
-            scrollContainer.style.cursor = 'grab';
-        });
+    scrollContainer.addEventListener('mouseup', () => {
+        isDown = false;
+        scrollContainer.classList.remove('grabbing');
+         scrollContainer.style.cursor = 'grab';
+    });
 
-        scrollContainer.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
+    scrollContainer.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - scrollContainer.offsetLeft;
+        const walk = (x - startX) * 2; //scroll-fast
+        scrollContainer.scrollLeft = scrollLeft - walk;
+    });
+}
+
+
+// Contact Form Handling
+function initializeContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('form-message');
+
+    if (contactForm && formMessage) {
+        contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const x = e.pageX - scrollContainer.offsetLeft;
-            const walk = (x - startX) * 2; //scroll-fast
-            scrollContainer.scrollLeft = scrollLeft - walk;
+            
+            // This is a dummy submission handler.
+            // In a real application, you would send this data to a server.
+            const formData = new FormData(contactForm);
+            console.log('Form Submitted:');
+            for (let [key, value] of formData.entries()) {
+                console.log(`${key}: ${value}`);
+            }
+
+            formMessage.style.color = 'var(--netflix-light)';
+            formMessage.textContent = 'Thank you for your message! I will get back to you soon.';
+            
+            contactForm.reset();
+
+            setTimeout(() => {
+                formMessage.textContent = '';
+            }, 5000);
         });
     }
-});
+}
+
+// Navbar shrink on scroll
+function initializeNavbarShrink() {
+    const navbar = document.getElementById('navbar');
+    if (!navbar) return;
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('py-0');
+            navbar.classList.remove('py-2');
+        } else {
+            navbar.classList.remove('py-0');
+            navbar.classList.add('py-2');
+        }
+    });
+}
 
 // Inline script from HTML
 
@@ -754,53 +762,17 @@ function initializePortfolio() {
                         'netflix-black': '#141414',
                         'netflix-red': '#e50914',
                         'netflix-gray': '#333333',
-                        'netflix-light-gray': '#808080',
+                        'netflix-light-gray': '#555555',
                         'netflix-light': '#f5f5f1',
                         'netflix-white': '#ffffff'
                     },
                     fontFamily: {
-                        'sans': ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
-                    },
-                    letterSpacing: {
-                        'dramatic': '0.1em',
+                        'netflix': ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif']
                     }
                 }
             }
         }
     
-
-// Inline script from HTML
-
-// Protection against unwanted navigation in iframe content
-(function() {
-    'use strict';
-    
-    // Only prevent navigation if we're in an iframe
-    if (window.parent !== window) {
-        // Prevent all navigation attempts in iframe
-        document.addEventListener('click', function(e) {
-            const target = e.target.closest('a');
-            if (target && target.href && !target.href.startsWith('#')) {
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-            }
-        }, true);
-        
-        // Prevent form submissions in iframe
-        document.addEventListener('submit', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
-        }, true);
-        
-        // Override window.open in iframe
-        window.open = function() {
-            return null;
-        };
-    }
-})();
-
         
     } catch (error) {
         console.warn('Portfolio initialization error:', error);
